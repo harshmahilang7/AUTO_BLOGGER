@@ -1,0 +1,147 @@
+<!-- 
+  @Author: Dastan_Alam
+  @Date:   24-03-2024 06:07:05 PM       18:07:05
+  @Last Modified by:   Dastan_Alam
+  @Last Modified time: 28-03-2024 01:15:41 PM       13:15:41
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoBloger</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .btn-run,
+        .btn-stop {
+            font-size: 1.5rem;
+            margin: 20px 10px;
+            padding: 15px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-run {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-stop {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to AutoBlogger</h1>
+    </header>
+
+    <div class="container">
+        <h2>About AutoBlogger</h2>
+        <p>This is an amazing app for automatic blogging. It helps you create and manage your blog effortlessly.</p>
+        <p id="status"></p> <!-- Placeholder for status update -->
+    </div>
+
+    <footer>
+        <form id="programForm" method="post" action="">
+            <!-- <form action="{{ url_for('run_program') }}" method="post"> -->
+            <button id="runButton" class="btn btn-run">Run Program</button>
+            <!-- <button type="submit" name="run" class="btn btn-run">Run Program</button> -->
+            <!-- </form> -->
+            <form action="/stop_program" method="post">
+            <button type="submit" id="stopButton" name="stop" class="btn btn-stop">Stop Program</button>
+            </form>
+        </form>
+    </footer>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    
+
+    <script>
+        document.getElementById('runButton').addEventListener('click', function() {
+            // Send an AJAX request to the Flask route to run the external script
+            fetch('/run_external_script', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('External script executed successfully');
+                } else {
+                    console.error('Error executing external script');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+    
+    <script>
+        // Get the button element
+        var button = document.getElementById("runButton");
+        
+        // Add a click event listener to the button
+        button.addEventListener("click", function() {
+            // Display an alert box when the button is clicked
+            alert("Application is starting ");
+        });
+        </script>
+        
+        <script>
+            // Get the button element
+            var button = document.getElementById("stopButton");
+            
+            // Add a click event listener to the button
+            button.addEventListener("click", function() {
+                // Display an alert box when the button is clicked
+                alert("Application is stoped");
+            });
+            </script>
+</body>
+
+</html>
